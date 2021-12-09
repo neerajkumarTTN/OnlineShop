@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Search Result{% endblock  %}
+
+{% block content %}
+
+
+<section id="welcome">
+
+		<header class="border-bottom mb-4 pb-3">
+				<div class="form-inline">
+					<span class="mr-md-auto">Sorted Products are </span>	
+				</div>
+		</header>
+
+    
+<div class="row">
+{% if products %}
+    {% for product in products %}
+    <div class="col-md-3">
+            <div class="card card-product-grid">
+                <a href="{% url "item-detail-page" product.slug %}" class="img-wrap"> <img src="{{product.image.url}}"> </a>
+                <figcaption class="info-wrap">
+                    <a href="{% url "item-detail-page" product.slug %}" class="title">{{product.name}}</a>
+                    <div class="price mt-1">RS:{{product.price}}</div> 
+                    {% comment %} <div class="price mt-1">Quantity:{{product.availability}}</div> {% endcomment %}
+                    {% if product.availability %}
+                    <div class="price mt-1 text-success">Status:Available</div>
+                    {% else %}
+                    <div class="price mt-1 text-danger">Status:Out of Stock</div>
+                    {% endif %}
+        
+                </figcaption>
+            </div>
+    </div>
+{% endfor %}
+{% else %}
+		<p>No Product Available</p>
+		{% endif %}
+</div>
+         
+        </ul>
+    
+</section>
+
+</div>
+<nav class="mt-4" aria-label="Page navigation sample">
+  <ul class="pagination">
+    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+<footer class="section-footer border-top padding-y">
+	<div class="container">
+		<p class="float-md-right"> 
+			&copy Copyright 2019 All rights reserved
+		</p>
+		<p>
+			<a href="#">Terms and conditions</a>
+		</p>
+	</div><!-- //container -->
+</footer>
+{% endblock  %}

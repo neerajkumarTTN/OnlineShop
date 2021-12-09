@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Order Placed
+{% endblock  %}
+{% block content %}
+
+<h1>Thank You</h1>
+
+<p > Your Order has been successfully placed.Your order id {{order.id}}</p> 
+
+<a href="{% url 'user-profile' %}" class="btn btn-primary">Orders</a>
+
+{% endblock %}

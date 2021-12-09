@@ -1,0 +1,40 @@
+  {% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Order
+{% endblock  %}
+
+{% block  content%}
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Order ID</th>
+      <th scope="col">Product</th>
+	  <th scope="col">Quantity</th>
+      <th scope="col">Unit Price</th>
+	  <th scope="col">Total Price</th>
+	  <th scope="col">Order date</th>
+	  <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in items %}
+    <tr>
+      <th scope="row">{{item.order.id}}</th>
+      <td><img src={{item.product.image.url}} class="img-xs border">
+	  <var class="price text-muted">{{item.product.name}}</var>
+	  </td>
+	  <td>{{item.quantity}}</td>
+      <td>{{item.product.price}}</td>
+	  <td>{{item.total_cost}}</td>
+      <td>{{item.order.ordered_date}}</td>
+	  <td>{{item.order.status}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock  %}

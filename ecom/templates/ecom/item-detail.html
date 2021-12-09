@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{% endblock  %}
+
+<link rel="stylesheet" href="bootstrap.css">
+
+{% block content %}
+<div class="card">
+	<div class="row no-gutters">
+		<aside class="col-md-6">
+<article class="gallery-wrap"> 
+	<div class="img-big-wrap">
+	   <a href="#"><img src="{{product.image.url}}"></a>
+	</div> <!-- img-big-wrap.// -->
+	
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<main class="col-md-6 border-left">
+<article class="content-body">
+
+<h4 class="title">{{product.name}}</h4>
+
+<div class="mb-3"> 
+	<var class="price h4">Rs:{{product.price}}</var> 
+</div> 
+
+<div class="mb-3"> 
+	<var class="price h4">Available:{{product.availability}}</var> 
+</div> 
+
+<div class="mb-2"> 
+<h5>Description</h5>
+	 <p>{{product.content}}<p> 
+</div> 
+
+<div class="col-lg col-sm col-md col-6 flex-grow-0">
+	</div> 
+	{% if request.user.is_authenticated %}
+
+    {% if item_already_in_cart %}
+	
+	<a href="{% url 'cart-page' %}" class="btn  btn-warning shadow px-5 py-2 ms-4">View Cart</a>
+	
+	{% else %}
+		{% if product.availability == 0 %}
+
+		<button type="submit"  class="btn  btn-danger"> Out Of Stock</button>
+
+		{% else %}
+
+		<form action="{% url 'add-cart-page' %}" class ="d-inline">
+		<input type ="hidden" name="prod_id" value={{product.id}}
+		id="prod_id">
+		
+		<button type="submit" class="btn  btn-primary">Add To Cart </button>
+	
+		{% endif %}
+		
+		</form>
+
+	{% endif %}
+
+	{% else %}
+
+	 <a href="{% url "login" %}" class="btn  btn-primary"> Add To Cart<span class="text"></span> <i class="fas fa-shopping-cart"></i>  </a>
+ 
+	 {% endif %}
+
+</article> <!-- product-info-aside .// -->
+		</main> <!-- col.// -->
+	</div> <!-- row.// -->
+</div> 
+
+
+<br>
+
+<div class="row">
+			<div class="col-md-9">
+
+	<header class="section-heading">
+		<h3>Seller Details</h3>  
+		
+	</header>
+
+	<article class="box mb-3">
+		<div class="icontext w-100">
+			<img src="{% static "ecom/images/seller.png" %}" class="img-xs icon rounded-circle">
+			<div class="text">
+				<span class="date text-muted float-md-right">10.11.2021 </span>  
+				<h6 class="mb-1">Neeraj Kumar </h6>
+				
+			</div>
+		</div> <!-- icontext.// -->
+		<div class="mt-3">
+			<p>
+				Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip
+			</p>	
+		</div>
+	</article>
+
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+
+{% endblock  %}

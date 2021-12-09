@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock  %}
+
+{% block content %}
+<section id="welcome">
+    <header>
+        <h2>Popular Product</h2>
+        <ul>
+    
+<div class="row">
+    {% for product in product %}
+    <div class="col-md-3">
+            <div class="card card-product-grid">
+                <a href="{% url "item-detail-page" product.slug %}" class="img-wrap"> <img src="{{product.image.url}}"> </a>
+                <figcaption class="info-wrap">
+                    <a href="{% url "item-detail-page" product.slug %}" class="title">{{product.name}}</a>
+                    <div class="price mt-1">RS:{{product.price}}</div> 
+                    {% comment %} <div class="price mt-1">Quantity:{{product.availability}}</div> {% endcomment %}
+                    {% if product.availability %}
+                    <div class="price mt-1 text-success">Status:Available</div>
+                    {% else %}
+                    <div class="price mt-1 text-danger">Status:Out of Stock</div>
+                    {% endif %}
+        
+                </figcaption>
+            </div>
+    </div>
+{% endfor %}
+</div>
+         
+        </ul>
+    </header>
+</section>
+{% endblock content %}

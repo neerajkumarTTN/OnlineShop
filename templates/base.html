@@ -1,0 +1,169 @@
+
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>E-Commerce Website</title>
+{% block css_files %}{% endblock %}
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+{% comment %} <script src="/static/ecom/js/jquery-2.0.0.min.js" type="text/javascript"></script> {% endcomment %}
+<script src={% static 'ecom/js/jquery-2.0.0.min.js' %} type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+{% comment %} <script src="/static/ecom/js/bootstrap.bundle.min.js" type="text/javascript"></script> {% endcomment %}
+<script src="{% static 'ecom/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+
+{% comment %} <link href="/static/ecom/css/bootstrap.css" rel="stylesheet" type="text/css"/> {% endcomment %}
+<link rel="stylesheet" href="{% static 'ecom/css/bootstrap.css' %}">
+<!-- Font awesome 5 -->
+{% comment %} <link href="/static/ecom/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'ecom/fonts/fontawesome/css/all.min.css' %}">
+<!-- custom style -->
+{% comment %} <link href="/static/ecom/css/ui.css" rel="stylesheet" type="text/css"/> {% endcomment %}
+<link rel="stylesheet" href="{% static 'ecom/css/ui.css' %}">
+
+{% comment %} <link href="/static/ecom/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" /> {% endcomment %}
+<link rel="stylesheet" href="{% static 'ecom/css/responsive.css' %}">
+<!-- custom javascript -->
+{% comment %} <script src="/static/ecom/js/script.js" type="text/javascript"></script> {% endcomment %}
+
+<script src="{% static 'ecom/js/script.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body>
+
+
+<header class="section-header">
+<nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
+<!-- container //  -->
+</nav>
+
+<section class="header-main border-bottom">
+	<div class="container">
+<div class="row align-items-center">
+	<a href="/" class="btn btn-primary">My Store</a>
+
+
+<div class="col-lg col-sm col-md col-6 flex-grow-0">
+		<div class="category-wrap dropdown d-inline-block float-right">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+				<i class="btn btn-primary"></i> Sort By 
+			</button>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href=" {% url 'filterdata' 'name' %}">Name</a>
+				<a class="dropdown-item" href="{% url 'filterdata' 'price' %}">Price</a>
+			</div>
+		</div>  <!-- category-wrap.// -->
+	</div> 
+
+
+
+
+
+
+
+
+
+
+	<div class="col-lg  col-md-6 col-sm-12 col">
+
+		<form action="{% url "search-result" %}" method="get"class="search">
+		{% csrf_token %}
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" style="width:60%;" name="query" placeholder="Search">
+			    
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div> <!-- col.// -->
+	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					<div class="widget-header">
+{% if user.is_authenticated %}
+						{% comment %} <small class="title text-muted">Welcome {{request.user.username}}</small> {% endcomment %}
+
+						 <div > 
+							
+							<a href="/profile" ><span class="text-capitalize">{{request.user.username}}</a> <span class="dark-transp"> | </span>
+							<a href="/logout">Logout</a>
+
+							{% comment %} <a href="{% url 'cart-page' %}" class="widget-header pl-3 ml-3"> {% endcomment %}
+							<a href="{% url 'cart-page' %}" class="widget-header pl-3 ml-3">
+
+								<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart blue-color"></i></div>
+								<span class="badge badge-pill badge-danger notify"></span>
+							</a>
+				
+						</div> 
+
+		
+{% else %}
+						<div> 
+							<a href="/login">Sign in</a> <span class="dark-transp"> | </span>
+							<a href="/register"> Register</a>
+						</div>
+
+					</div>
+
+					<a href="{% url 'login' %}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart blue-color"></i></div>
+						<span class="badge badge-pill badge-danger notify">0</span>
+					</a>
+
+					
+				</div> <!-- widgets-wrap.// -->
+				
+			</div> <!-- col.// -->
+			{% endif %}
+</div> <!-- row.// -->
+	</div> <!-- container.// -->
+</section> <!-- header-main .// -->
+
+
+</header> <!-- section-header.// -->
+
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+</div> <!-- container //  -->
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<!-- ========================= SECTION  END// ========================= -->
+
+
+{% block content %}
+{% endblock  %}
+</body>
+</html>
+
+
+
+
+

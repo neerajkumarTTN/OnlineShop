@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Checkout
+{% endblock  %}
+
+<link rel="stylesheet" href="{% static "bootstrap.css" %}">
+
+{% block content %}
+
+<div class="row">
+<main class="col-md-8">
+
+<article class="card mb-4">
+<div class="card-body">
+	<h4 class="card-title mb-4">Your Order</h4>
+	{% for item in cart_items %}
+	<div class="row">
+		<div class="col-md-6">
+			<figure class="itemside  mb-4">
+				<div class="aside"><img src="{{item.product.image.url}}" class="border img-sm"></div>
+				<figcaption class="info">
+					<p>Product: {{item.product.name}} </p>
+					<p>Quantity:{{item.quantity}}</p>
+					<span class="text-muted">{{item.quantity}}x {{item.product.price}}= {{item.total_cost}} </span>
+				</figcaption>
+			</figure>
+		</div> <!-- col.// -->
+	</div> <!-- row.// -->
+	{% endfor %}
+</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+<article class="card mb-4">
+
+<div class="card-body">
+	<h4 class="card-title mb-4">Shipping Address</h4>
+	<form action="placed_order/">
+
+<div class="card">
+		<div class ="card-body">
+		<p>{{user.address}}</p>
+		<p>Contact No:{{user.mobile}}
+		 Email:{{user.email}}</p>
+		</div>
+</div>
+		{% comment %} <div class ="form-check mt-2 mb-5">
+		<input class ="form-check-input" type="radio" name="userid" id="useradd{{forloop.counter}}"
+		 value="{{ad.id}}">
+		<label class "form-check-label fw-bold" for="useradd{{forloop.counter}}" > Address:{{forloop.counter}}</label>
+		<hr>
+		</div>  {% endcomment %}
+
+	{% comment %} {% for ad in add %}
+	<div class="card">
+		<div class ="card-body">
+		<h5>{{ad.first_name}} {{ad.last_name}}</h5>
+		<p>{{ad.address}}, {{ad.city}}- {{ad.postal_code}}</p>
+		<p>{{ad.phone_number}},  
+		 Email:{{ad.email}}</p>
+		</div>
+	</div>
+		<div class ="form-check mt-2 mb-5">
+		<input class ="form-check-input" type="radio" name="userid" id="useradd{{forloop.counter}}"
+		 value="{{ad.id}}">
+		<label class "form-check-label fw-bold" for="useradd{{forloop.counter}}" > Address:{{forloop.counter}}</label>
+		<hr>
+	</div> 
+	 {% endfor %} {% endcomment %}
+
+		
+	</form>
+</div> <!-- card-body.// -->
+</article>
+  
+</main> <!-- col.// -->
+		<aside class="col-md-4">
+			<div class="card">
+			<header></header>
+		<div class="card-body">
+			  
+			  <dd ><strong>Total cast + Rs:70.0 = Rs:{{totalamount}}</strong></dd>
+			</dl>
+			<hr>
+			<p class="text-center mb-3">
+				<img src="{% static "ecom/images/payments.png" %}" height="26">
+			</p>
+			<a href="{% url "placed-order" %}" class="btn btn-primary btn-block"> Place Order </a>
+			
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 2 END//  ================================= -->
+</div> <!-- container .//  -->
+</section>
+{% endblock  %}
